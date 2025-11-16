@@ -1,0 +1,7 @@
+.moon_container{
+  background-color: blue;
+  height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
