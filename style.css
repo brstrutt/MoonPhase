@@ -19,5 +19,6 @@
 }
 
 .moon .full {
-    mask-image: url('./images/example.svg');
+    mask-image: url('./images/crescent_moon.svg');
+    mask-size: cover;
 }
