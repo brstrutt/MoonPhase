@@ -11,7 +11,7 @@ const MoonPhase = Object.freeze({
 });
 
 function getMoonCycleProgress() {
-    const moonCycleLengthMs = 29.5 * 60 * 60 * 1000;
+    const moonCycleLengthMs = 29.5 * 24 * 60 * 60 * 1000;
     const knownNewMoonTime = new Date("2025-10-21T12:25:00.000+00:00");
     const millisecondsSinceKnownNewMoonTime = Date.now() - knownNewMoonTime;
     const millisecondsIntoCurrentCycle = millisecondsSinceKnownNewMoonTime % moonCycleLengthMs;
