@@ -10,12 +10,13 @@
 <body>
     <main>
         <h1>Moon</h1>
+        <div id="moon_phase"></div>
 
         <div class="moon_container">
-            <div id="moon">
+            <div class="moon">
+                <img src="./images/new_moon_adjusted.jpg" alt="New Moon" />
+                <img src="./images/full_moon_adjusted.jpg" alt="Full Moon" />
             </div>
-            <img src="./images/full_moon_adjusted.jpg" alt="Full Moon" />
-            <img src="./images/new_moon_adjusted.jpg" alt="New Moon" />
             <script>
                 const MoonPhase = Object.freeze({
                     newMoon: "New Moon",
@@ -46,7 +47,7 @@
                     return MoonPhase.newMoon;
                 }
                 document.addEventListener("DOMContentLoaded", async function () {
-                    moon = document.getElementById("moon");
+                    moon = document.getElementById("moon_phase");
                     const moonCycleProgress = getMoonCycleProgress();
                     const currentPhase = getMoonPhaseFromCycleProgress(moonCycleProgress);
                     console.log(`Current moon phase: ${currentPhase}`);
