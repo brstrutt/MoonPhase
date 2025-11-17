@@ -40,7 +40,10 @@ function displayMoonPhase(phase) {
 
     const moon_image = document.querySelector('.moon .full');
     const half_moon_mask = getHalfMoonMask();
-    if (moon_image) moon_image.style.maskImage = `url('${half_moon_mask}')`;
+    if (moon_image) {
+        moon_image.style.maskImage = `url('${half_moon_mask}')`;
+        moon_image.style.opacity = 1;
+    }
 }
 
 function getHalfMoonMask() {
