@@ -1,6 +1,5 @@
-import {getCrescentMoonMask} from './moonPhaseMasks.js';
 
-const MoonPhase = Object.freeze({
+export const MoonPhase = Object.freeze({
     newMoon: "New Moon",
     waxingCrescent: "Waxing Crescent",
     waxingHalf: "Waxing Half",
@@ -10,6 +9,10 @@ const MoonPhase = Object.freeze({
     waningHalf: "Waning Half",
     waningCrescent: "Waning Crescent",
 });
+
+export function getMoonPhase() {
+    return getMoonPhaseFromCycleProgress(getMoonCycleProgress());
+}
 
 function getMoonCycleProgress() {
     const moonCycleLengthMs = 29.5 * 24 * 60 * 60 * 1000;
@@ -31,23 +34,3 @@ function getMoonPhaseFromCycleProgress(cycleProgress) {
     return MoonPhase.newMoon;
 }
 
-function getMoonPhase() {
-    return getMoonPhaseFromCycleProgress(getMoonCycleProgress());
-}
-
-function displayMoonPhase(phase) {
-    const moon_text = document.getElementById("moon_phase");
-    if (moon_text) moon_text.textContent = phase;
-
-    const moon_image = document.querySelector('.moon .full');
-    const half_moon_mask = getCrescentMoonMask();
-    if (moon_image) {
-        moon_image.style.maskImage = `url('${half_moon_mask}')`;
-        moon_image.style.opacity = 1;
-    }
-}
-
-document.addEventListener("DOMContentLoaded", async function () {
-    const currentPhase = getMoonPhase();
-    displayMoonPhase(currentPhase);
-});
