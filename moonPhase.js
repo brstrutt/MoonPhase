@@ -30,10 +30,16 @@ function getMoonPhaseFromCycleProgress(cycleProgress) {
     return MoonPhase.newMoon;
 }
 
-document.addEventListener("DOMContentLoaded", async function () {
+function getMoonPhase() {
+    return getMoonPhaseFromCycleProgress(getMoonCycleProgress());
+}
+
+function displayMoonPhase(phase) {
     moon = document.getElementById("moon_phase");
-    const moonCycleProgress = getMoonCycleProgress();
-    const currentPhase = getMoonPhaseFromCycleProgress(moonCycleProgress);
-    console.log(`Current moon phase: ${currentPhase}`);
-    if (moon) moon.textContent = currentPhase;
+    if (moon) moon.textContent = phase;
+}
+
+document.addEventListener("DOMContentLoaded", async function () {
+    const currentPhase = getMoonPhase();
+    displayMoonPhase(currentPhase);
 });
