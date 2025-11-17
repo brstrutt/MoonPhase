@@ -1,4 +1,4 @@
-import {getHalfMoonMask} from './moonPhaseMasks.js';
+import {getCrescentMoonMask} from './moonPhaseMasks.js';
 
 const MoonPhase = Object.freeze({
     newMoon: "New Moon",
@@ -40,7 +40,7 @@ function displayMoonPhase(phase) {
     if (moon_text) moon_text.textContent = phase;
 
     const moon_image = document.querySelector('.moon .full');
-    const half_moon_mask = getHalfMoonMask();
+    const half_moon_mask = getCrescentMoonMask();
     if (moon_image) {
         moon_image.style.maskImage = `url('${half_moon_mask}')`;
         moon_image.style.opacity = 1;
