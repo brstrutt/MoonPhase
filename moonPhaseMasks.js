@@ -1,5 +1,10 @@
 import { MoonPhase } from "./moonPhase.js";
 
+/**
+ * 
+ * @param {String} currentPhase - The current moon phase as defined in the MoonPhase "enum"
+ * @returns {String} A URL encoded SVG definition. Intended to be used directly in `url()` calls in CSS.
+ */
 export function getMoonPhaseMask(currentPhase) {
     const getMask = () => {
         switch(currentPhase){
@@ -18,6 +23,11 @@ export function getMoonPhaseMask(currentPhase) {
     return urlEncodeSvgImage(mask);
 }
 
+/**
+ * 
+ * @param {String} imageString - An image definiton (expected to be an SVG definition)
+ * @returns {String} A URL encoded version of the image, that can be used directly in CSS `url()` clauses
+ */
 function urlEncodeSvgImage(imageString) {
     return "data:image/svg+xml;base64," + btoa(imageString);
 }

@@ -1,4 +1,6 @@
-
+/**
+ * Enum defining the different Phases of the moon. Of course Javascript doesn't have enums...so it's just a const object
+ */
 export const MoonPhase = Object.freeze({
     newMoon: "New Moon",
     waxingCrescent: "Waxing Crescent",
@@ -10,10 +12,16 @@ export const MoonPhase = Object.freeze({
     waningCrescent: "Waning Crescent",
 });
 
+/**
+ * @returns {String} The current moon phase as defined in the MoonPhase "enum"
+ */
 export function getMoonPhase() {
     return getMoonPhaseFromCycleProgress(getMoonCycleProgress());
 }
 
+/**
+ * @returns {number} The percentage completion of the current moon cycle (0% and 100% are both New Moon, 50% is Full Moon)
+ */
 function getMoonCycleProgress() {
     const moonCycleLengthMs = 29.5 * 24 * 60 * 60 * 1000;
     const knownNewMoonTime = new Date("2025-10-21T12:25:00.000+00:00");
@@ -22,6 +30,11 @@ function getMoonCycleProgress() {
     return millisecondsIntoCurrentCycle / moonCycleLengthMs;
 }
 
+/**
+ * 
+ * @param {number} cycleProgress - Percentage completion of a moon cycle (0% and 100% are both New Moon, 50% is Full Moon)
+ * @returns {String} The current moon phase as defined in the MoonPhase "enum"
+ */
 function getMoonPhaseFromCycleProgress(cycleProgress) {
     if (cycleProgress < 0.05) return MoonPhase.newMoon;
     if (cycleProgress < 0.20) return MoonPhase.waxingCrescent;
