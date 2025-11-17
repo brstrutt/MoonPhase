@@ -19,6 +19,6 @@ body {
 }
 
 .moon .full {
-    mask-image: url('./images/crescent_moon.svg');
+    mask-image: url('./images/half_moon_mask.svg');
     mask-size: cover;
 }
