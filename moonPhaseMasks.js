@@ -1,23 +1,15 @@
-import { MoonPhase } from "./moonPhase.js";
-
 /**
  * 
- * @param {String} currentPhase - The current moon phase as defined in the MoonPhase "enum"
+ * @param {number} cycleProgress - A percentage between 0.0 and 1.0 representing how far through a full moon cycle we currently are
  * @returns {String} A URL encoded SVG definition. Intended to be used directly in `url()` calls in CSS.
  */
-export function getMoonPhaseMask(currentPhase) {
+export function getMoonPhaseMask(cycleProgress) {
    const getMask = () => {
-      switch (currentPhase) {
-         case MoonPhase.newMoon:
-         case MoonPhase.waxingCrescent: return getCrescentMoonMask();
-         case MoonPhase.waxingHalf: return getHalfMoonMask();
-         case MoonPhase.waxingGibbous: return getGibbousMoonMask();
-         case MoonPhase.fullMoon: return getFullMoonMask();
-         case MoonPhase.waningGibbous: return getGibbousMoonMask();
-         case MoonPhase.waningHalf: return getHalfMoonMask();
-         case MoonPhase.waningCrescent: return getCrescentMoonMask();
-         default: return getCrescentMoonMask();
-      }
+      if(cycleProgress <= 0.25) return getCrescentMoonMask(cycleProgress);
+      if(cycleProgress <= 0.5) return getGibbousMoonMask();
+      if(cycleProgress <= 0.75) return getGibbousMoonMask();
+      if(cycleProgress <= 1.0) return getCrescentMoonMask(cycleProgress);
+      return getFullMoonMask(); // TODO: Create a better error fallback mask. Something OBVIOUSLY wrong would be good.
    };
    const mask = getMask();
    return urlEncodeSvgImage(mask);
@@ -32,8 +24,21 @@ function urlEncodeSvgImage(imageString) {
    return "data:image/svg+xml;base64," + btoa(imageString);
 }
 
-function getCrescentMoonMask() {
+/**
+ * Take a value range, and the current percentage distance through that range. Returns the value associated with that distance through the range.
+ * @param {number} min 
+ * @param {number} max 
+ * @param {number} currentPercentage (should be between 0.0 and 1.0, 0.0 will return the minimum value, 1.0 will return the maximum value)
+ * @returns 
+ */
+function interpolate(min, max, currentPercentage) {
+   return min + (max - min) * currentPercentage;
+}
 
+function getCrescentMoonMask(cycleProgress) {
+   const crescentProgress = Math.min(1.0, cycleProgress * 4.0);
+   const edgePosition = interpolate(100, 50, crescentProgress);
+   const lineAngle = interpolate(50, 0, crescentProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="100mm"
@@ -77,11 +82,10 @@ function getCrescentMoonMask() {
       <path
          id="path3"
          style="display:block;fill:#000000;stroke-width:0.269703;filter:url(#filter2)"
-         d="M 0,0 V 100.0001 H 50.000049 A 45,50.000002 0 0 0 94.999888,50.000049 45,50.000002 0 0 0 50.000049,0 Z" />
+         d="M 0,0 V 100.0001 H 50.000049 A ${lineAngle},50.000002 0 0 0 ${edgePosition},50.000049 ${lineAngle},50.000002 0 0 0 50.000049,0 Z" />
     </mask>
   </defs>
-  <g
-     id="layer1">
+  <g id="layer1">
     <path
        style="fill:#000000;stroke-width:0.284293;filter:url(#filter1)"
        id="path9"
