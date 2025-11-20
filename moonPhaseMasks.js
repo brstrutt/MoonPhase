@@ -6,21 +6,21 @@ import { MoonPhase } from "./moonPhase.js";
  * @returns {String} A URL encoded SVG definition. Intended to be used directly in `url()` calls in CSS.
  */
 export function getMoonPhaseMask(currentPhase) {
-    const getMask = () => {
-        switch(currentPhase){
-            case MoonPhase.newMoon:
-            case MoonPhase.waxingCrescent: return getCrescentMoonMask();
-            case MoonPhase.waxingHalf: return getHalfMoonMask();
-            case MoonPhase.waxingGibbous: return getGibbousMoonMask();
-            case MoonPhase.fullMoon: return getFullMoonMask();
-            case MoonPhase.waningGibbous: return getGibbousMoonMask();
-            case MoonPhase.waningHalf: return getHalfMoonMask();
-            case MoonPhase.waningCrescent: return getCrescentMoonMask();
-            default: return getCrescentMoonMask();
-        }
-    };
-    const mask = getMask();
-    return urlEncodeSvgImage(mask);
+   const getMask = () => {
+      switch (currentPhase) {
+         case MoonPhase.newMoon:
+         case MoonPhase.waxingCrescent: return getCrescentMoonMask();
+         case MoonPhase.waxingHalf: return getHalfMoonMask();
+         case MoonPhase.waxingGibbous: return getGibbousMoonMask();
+         case MoonPhase.fullMoon: return getFullMoonMask();
+         case MoonPhase.waningGibbous: return getGibbousMoonMask();
+         case MoonPhase.waningHalf: return getHalfMoonMask();
+         case MoonPhase.waningCrescent: return getCrescentMoonMask();
+         default: return getCrescentMoonMask();
+      }
+   };
+   const mask = getMask();
+   return urlEncodeSvgImage(mask);
 }
 
 /**
@@ -29,11 +29,12 @@ export function getMoonPhaseMask(currentPhase) {
  * @returns {String} A URL encoded version of the image, that can be used directly in CSS `url()` clauses
  */
 function urlEncodeSvgImage(imageString) {
-    return "data:image/svg+xml;base64," + btoa(imageString);
+   return "data:image/svg+xml;base64," + btoa(imageString);
 }
 
 function getCrescentMoonMask() {
-    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="100mm"
    height="100mm"
@@ -92,7 +93,7 @@ function getCrescentMoonMask() {
 }
 
 function getFullMoonMask() {
-    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
@@ -130,7 +131,7 @@ function getFullMoonMask() {
 }
 
 function getHalfMoonMask() {
-    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
@@ -185,7 +186,7 @@ function getHalfMoonMask() {
 }
 
 function getGibbousMoonMask() {
-    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
 <svg
