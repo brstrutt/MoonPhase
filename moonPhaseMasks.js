@@ -26,6 +26,7 @@ function urlEncodeSvgImage(imageString) {
 
 /**
  * Take a value range, and the current percentage distance through that range. Returns the value associated with that distance through the range.
+ * TODO: Create a non-linear interpolation that will better approximate the curve we'd see when a shadow moves across a sphere
  * @param {number} min 
  * @param {number} max 
  * @param {number} currentPercentage (should be between 0.0 and 1.0, 0.0 will return the minimum value, 1.0 will return the maximum value)
