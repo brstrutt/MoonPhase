@@ -9,7 +9,7 @@ export function getMoonPhaseMask(cycleProgress) {
       if(cycleProgress <= 0.5) return getGibbousMoonMask();
       if(cycleProgress <= 0.75) return getGibbousMoonMask();
       if(cycleProgress <= 1.0) return getCrescentMoonMask(cycleProgress);
-      return getFullMoonMask(); // TODO: Create a better error fallback mask. Something OBVIOUSLY wrong would be good.
+      return getGibbousMoonMask(); // TODO: Create a better error fallback mask. Something OBVIOUSLY wrong would be good.
    };
    const mask = getMask();
    return urlEncodeSvgImage(mask);
@@ -91,99 +91,6 @@ function getCrescentMoonMask(cycleProgress) {
        id="path9"
        clip-path="none"
        mask="url(#mask-powermask-path-effect3)"
-       d="M 100,50 A 50,50 0 0 1 50,100 50,50 0 0 1 0,50 50,50 0 0 1 50,0 50,50 0 0 1 100,50 Z" />
-  </g>
-</svg>`;
-}
-
-function getFullMoonMask() {
-   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="100mm"
-   height="100mm"
-   viewBox="0 0 100 100"
-   version="1.1"
-   id="svg1"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1">
-    <filter
-       style="color-interpolation-filters:sRGB"
-       id="filter1"
-       x="-0.012"
-       y="-0.012"
-       width="1.024"
-       height="1.024">
-      <feGaussianBlur
-         stdDeviation="0.5"
-         id="feGaussianBlur1" />
-    </filter>
-  </defs>
-  <g
-     id="layer1">
-    <circle
-       style="fill:#000000;stroke-width:0.284293;filter:url(#filter1)"
-       id="path9"
-       cx="50"
-       cy="50"
-       r="50" />
-  </g>
-</svg>`;
-}
-
-function getHalfMoonMask() {
-   return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Created with Inkscape (http://www.inkscape.org/) -->
-
-<svg
-   width="100mm"
-   height="100mm"
-   viewBox="0 0 100 100"
-   version="1.1"
-   id="svg1"
-   xmlns="http://www.w3.org/2000/svg"
-   xmlns:svg="http://www.w3.org/2000/svg">
-  <defs
-     id="defs1">
-    <clipPath
-       clipPathUnits="userSpaceOnUse"
-       id="clipPath15">
-      <rect
-         style="display:none;fill:#ffffff;stroke-width:0.233006"
-         id="rect15"
-         width="50"
-         height="100"
-         x="0"
-         y="0"
-         d="M 0,0 H 50 V 100 H 0 Z" />
-      <path
-         id="lpe_path-effect15"
-         style="fill:#ffffff;stroke-width:0.233006"
-         class="powerclip"
-         d="M -5,-5 H 105 V 105 H -5 Z M 0,0 V 100 H 50 V 0 Z" />
-    </clipPath>
-    <filter
-       style="color-interpolation-filters:sRGB"
-       id="filter1"
-       x="-0.012"
-       y="-0.012"
-       width="1.024"
-       height="1.024">
-      <feGaussianBlur
-         stdDeviation="0.5"
-         id="feGaussianBlur1" />
-    </filter>
-  </defs>
-  <g
-     id="layer1"
-     style="filter:url(#filter1)">
-    <path
-       style="fill:#000000;stroke-width:0.284293"
-       id="path9"
-       clip-path="url(#clipPath15)"
        d="M 100,50 A 50,50 0 0 1 50,100 50,50 0 0 1 0,50 50,50 0 0 1 50,0 50,50 0 0 1 100,50 Z" />
   </g>
 </svg>`;
