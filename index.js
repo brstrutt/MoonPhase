@@ -19,7 +19,18 @@ function displayMoonPhase(phase_progress) {
     }
 }
 
+function initialiseMoonPhasePercentageSlider(initial_phase_percentage) {
+    const slider = document.getElementById("moon_phase_percentage_slider");
+    if(slider){
+        slider.value = initial_phase_percentage * 100;
+        slider.oninput = function() {
+            displayMoonPhase(this.value/100.0);
+        }
+    }
+}
+
 document.addEventListener("DOMContentLoaded", async function () {
     const phase_progress = getMoonCycleProgress();
     displayMoonPhase(phase_progress);
+    initialiseMoonPhasePercentageSlider(phase_progress);
 });
