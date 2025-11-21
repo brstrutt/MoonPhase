@@ -6,8 +6,8 @@
 export function getMoonPhaseMask(cycleProgress) {
    const getMask = () => {
       if(cycleProgress <= 0.25) return getCrescentMoonMask(cycleProgress);
-      if(cycleProgress <= 0.5) return getGibbousMoonMask();
-      if(cycleProgress <= 0.75) return getGibbousMoonMask();
+      if(cycleProgress <= 0.5) return getGibbousMoonMask(cycleProgress);
+      if(cycleProgress <= 0.75) return getGibbousMoonMask(cycleProgress);
       if(cycleProgress <= 1.0) return getCrescentMoonMask(cycleProgress);
       return getGibbousMoonMask(); // TODO: Create a better error fallback mask. Something OBVIOUSLY wrong would be good.
    };
@@ -96,7 +96,9 @@ function getCrescentMoonMask(cycleProgress) {
 </svg>`;
 }
 
-function getGibbousMoonMask() {
+function getGibbousMoonMask(cycleProgress) {
+   const gibbousProgress = Math.min(1.0, (cycleProgress - 0.25) * 4.0);
+   const ellipseHorizontalRadius = interpolate(0, 50, gibbousProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -113,14 +115,6 @@ function getGibbousMoonMask() {
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath15">
-      <rect
-         style="display:none;fill:#ffffff;stroke-width:0.233006"
-         id="rect15"
-         width="50"
-         height="100"
-         x="0"
-         y="0"
-         d="M 0,0 H 50 V 100 H 0 Z" />
       <path
          id="lpe_path-effect15"
          style="fill:#ffffff;stroke-width:0.233006"
@@ -163,7 +157,7 @@ function getGibbousMoonMask() {
        clip-path="none"
        cx="50"
        cy="50"
-       rx="37.5"
+       rx="${ellipseHorizontalRadius}"
        ry="50"
        transform="matrix(0.99995879,0,0,1.00299,0.00206052,0.00154539)" />
   </g>
