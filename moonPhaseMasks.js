@@ -226,8 +226,8 @@ function getWaxingGibbousMoonMask(cycleProgress) {
 }
 
 function getWaningGibbousMoonMask(cycleProgress) {
-   const gibbousProgress = Math.min(1.0, (cycleProgress - 0.25) * 4.0);
-   const ellipseHorizontalRadius = interpolate(0, 50, gibbousProgress);
+   const gibbousProgress = Math.min(1.0, (cycleProgress - 0.50) * 4.0);
+   const ellipseHorizontalRadius = interpolate(50, 0, gibbousProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -248,7 +248,7 @@ function getWaningGibbousMoonMask(cycleProgress) {
          id="lpe_path-effect15"
          style="fill:#ffffff;stroke-width:0.233006"
          class="powerclip"
-         d="M -6.2,-6.2 H 106.2 V 106.2 H -6.2 Z M 0,0 V 100 H 50 V 0 Z" />
+         d="M 0,0 V 100 H 50 V 0 Z" />
     </clipPath>
     <filter
        style="color-interpolation-filters:sRGB"
