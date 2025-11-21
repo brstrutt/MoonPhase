@@ -21,11 +21,18 @@ function displayMoonPhase(phase_progress) {
 
 function initialiseMoonPhasePercentageSlider(initial_phase_percentage) {
     const slider = document.getElementById("moon_phase_percentage_slider");
-    if(slider){
+    if(!slider){ throw "Couldn't find the Phase slider element!"; }
+    const resetButton = document.getElementById("reset_phase_button");
+    if(!resetButton){ throw "Couldn't find the Reset button element!"; }
+    
+    slider.value = initial_phase_percentage * 100;
+    slider.oninput = () => {
+        displayMoonPhase(slider.value/100.0);
+    }
+
+    resetButton.onclick = () => {
         slider.value = initial_phase_percentage * 100;
-        slider.oninput = function() {
-            displayMoonPhase(this.value/100.0);
-        }
+        displayMoonPhase(slider.value/100.0);
     }
 }
 
