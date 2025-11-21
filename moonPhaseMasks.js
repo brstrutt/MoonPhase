@@ -97,9 +97,9 @@ function getWaxingCrescentMoonMask(cycleProgress) {
 }
 
 function getWaningCrescentMoonMask(cycleProgress) {
-   const crescentProgress = Math.min(1.0, cycleProgress * 4.0);
-   const edgePosition = interpolate(100, 50, crescentProgress);
-   const lineAngle = interpolate(50, 0, crescentProgress);
+   const crescentProgress = Math.min(1.0, (cycleProgress - 0.75) * 4.0);
+   const edgePosition = interpolate(50, 0, crescentProgress);
+   const lineAngle = interpolate(0, 50, crescentProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="100mm"
@@ -143,7 +143,7 @@ function getWaningCrescentMoonMask(cycleProgress) {
       <path
          id="path3"
          style="display:block;fill:#000000;stroke-width:0.269703;filter:url(#filter2)"
-         d="M 0,0 V 100.0001 H 50.000049 A ${lineAngle},50.000002 0 0 0 ${edgePosition},50.000049 ${lineAngle},50.000002 0 0 0 50.000049,0 Z" />
+         d="M 100,0 V 100.0001 H 50.000049 A ${lineAngle},50.000002 0 0 1 ${edgePosition},50.000049 ${lineAngle},50.000002 0 0 1 50.000049,0 Z" />
     </mask>
   </defs>
   <g id="layer1">
