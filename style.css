@@ -1,16 +1,22 @@
 body {
     padding: 0;
     margin: 0;
+    background-color: black;
+    color: bisque;
 }
 
 .moon_container {
-  background-color: black;
-  height: 70vh;
+    height: 70vh;
+    position: relative;
 }
 
 .moon {
-    position: relative;
-    height: 100%;
+    position: absolute;
+    height: 70vh;
+    width: 70vh;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 }
 
 .moon img {
