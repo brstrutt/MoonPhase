@@ -25,14 +25,14 @@ function initialiseMoonPhasePercentageSlider(initial_phase_percentage) {
     const resetButton = document.getElementById("reset_phase_button");
     if(!resetButton){ throw "Couldn't find the Reset button element!"; }
     
-    slider.value = initial_phase_percentage * 100;
+    slider.value = 100 - (initial_phase_percentage * 100);
     slider.oninput = () => {
-        displayMoonPhase(slider.value/100.0);
+        displayMoonPhase((100.0 - slider.value)/100.0);
     }
 
     resetButton.onclick = () => {
-        slider.value = initial_phase_percentage * 100;
-        displayMoonPhase(slider.value/100.0);
+        slider.value = 100 - (initial_phase_percentage * 100);
+        displayMoonPhase((100.0 - slider.value)/100.0);
     }
 }
 
