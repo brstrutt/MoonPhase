@@ -26,20 +26,19 @@ function urlEncodeSvgImage(imageString) {
 
 /**
  * Take a value range, and the current percentage distance through that range. Returns the value associated with that distance through the range.
- * TODO: Create a non-linear interpolation that will better approximate the curve we'd see when a shadow moves across a sphere
  * @param {number} min 
  * @param {number} max 
  * @param {number} currentPercentage (should be between 0.0 and 1.0, 0.0 will return the minimum value, 1.0 will return the maximum value)
  * @returns 
  */
-function interpolate(min, max, currentPercentage) {
+function linearInterpolate(min, max, currentPercentage) {
    return min + (max - min) * currentPercentage;
 }
 
 function getWaxingCrescentMoonMask(cycleProgress) {
-   const crescentProgress = Math.min(1.0, cycleProgress * 4.0);
-   const edgePosition = interpolate(100, 50, crescentProgress);
-   const lineAngle = interpolate(50, 0, crescentProgress);
+   const adjustedProgress = 1 - Math.cos(cycleProgress * Math.PI * 2.0); // Adjust the progress percentage to make the motion of the shadow slower in the early phase but faster in the late phase
+   const edgePosition = linearInterpolate(100, 50, adjustedProgress);
+   const lineAngle = linearInterpolate(50, 0, adjustedProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="100mm"
@@ -99,8 +98,8 @@ function getWaxingCrescentMoonMask(cycleProgress) {
 
 function getWaningCrescentMoonMask(cycleProgress) {
    const crescentProgress = Math.min(1.0, (cycleProgress - 0.75) * 4.0);
-   const edgePosition = interpolate(50, 0, crescentProgress);
-   const lineAngle = interpolate(0, 50, crescentProgress);
+   const edgePosition = linearInterpolate(50, 0, crescentProgress);
+   const lineAngle = linearInterpolate(0, 50, crescentProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="100mm"
@@ -160,7 +159,7 @@ function getWaningCrescentMoonMask(cycleProgress) {
 
 function getWaxingGibbousMoonMask(cycleProgress) {
    const gibbousProgress = Math.min(1.0, (cycleProgress - 0.25) * 4.0);
-   const ellipseHorizontalRadius = interpolate(0, 50, gibbousProgress);
+   const ellipseHorizontalRadius = linearInterpolate(0, 50, gibbousProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -228,7 +227,7 @@ function getWaxingGibbousMoonMask(cycleProgress) {
 
 function getWaningGibbousMoonMask(cycleProgress) {
    const gibbousProgress = Math.min(1.0, (cycleProgress - 0.50) * 4.0);
-   const ellipseHorizontalRadius = interpolate(50, 0, gibbousProgress);
+   const ellipseHorizontalRadius = linearInterpolate(50, 0, gibbousProgress);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
