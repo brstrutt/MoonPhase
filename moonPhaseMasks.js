@@ -37,8 +37,9 @@ function linearInterpolate(min, max, currentPercentage) {
 
 function getWaxingCrescentMoonMask(cycleProgress) {
    const adjustedProgress = 1 - Math.cos(cycleProgress * Math.PI * 2.0); // Adjust the progress percentage to make the motion of the shadow slower in the early phase but faster in the late phase
-   const edgePosition = linearInterpolate(100, 50, adjustedProgress);
-   const lineAngle = linearInterpolate(50, 0, adjustedProgress);
+   // Force these value to fixed precision to fix a bug where numbers with too many values after the decimal point breaks the SVG
+   const edgePosition = linearInterpolate(100, 50, adjustedProgress).toFixed(6);
+   const lineAngle = linearInterpolate(50, 0, adjustedProgress).toFixed(6);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="100mm"
