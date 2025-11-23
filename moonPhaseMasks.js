@@ -160,9 +160,9 @@ function getWaningCrescentMoonMask(cycleProgress) {
 }
 
 function getWaxingGibbousMoonMask(cycleProgress) {
-   const gibbousProgress = Math.min(1.0, (cycleProgress - 0.25) * 4.0);
+   const adjustedProgress = -1 * Math.cos(cycleProgress * Math.PI * 2.0); // Adjust the progress percentage to make the motion of the shadow slower at the edges of the moon
    // Force these value to fixed precision to fix a bug where numbers with too many values after the decimal point breaks the SVG
-   const ellipseHorizontalRadius = linearInterpolate(0, 50, gibbousProgress).toFixed(6);
+   const ellipseHorizontalRadius = linearInterpolate(0, 50, adjustedProgress).toFixed(6);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -229,9 +229,9 @@ function getWaxingGibbousMoonMask(cycleProgress) {
 }
 
 function getWaningGibbousMoonMask(cycleProgress) {
-   const gibbousProgress = Math.min(1.0, (cycleProgress - 0.50) * 4.0);
+   const adjustedProgress = -1 * Math.cos(cycleProgress * Math.PI * 2.0); // Adjust the progress percentage to make the motion of the shadow slower at the edges of the moon
    // Force these value to fixed precision to fix a bug where numbers with too many values after the decimal point breaks the SVG
-   const ellipseHorizontalRadius = linearInterpolate(50, 0, gibbousProgress).toFixed(6);
+   const ellipseHorizontalRadius = linearInterpolate(0, 50, adjustedProgress).toFixed(6);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
