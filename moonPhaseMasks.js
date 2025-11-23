@@ -99,8 +99,9 @@ function getWaxingCrescentMoonMask(cycleProgress) {
 
 function getWaningCrescentMoonMask(cycleProgress) {
    const crescentProgress = Math.min(1.0, (cycleProgress - 0.75) * 4.0);
-   const edgePosition = linearInterpolate(50, 0, crescentProgress);
-   const lineAngle = linearInterpolate(0, 50, crescentProgress);
+   // Force these value to fixed precision to fix a bug where numbers with too many values after the decimal point breaks the SVG
+   const edgePosition = linearInterpolate(50, 0, crescentProgress).toFixed(6);
+   const lineAngle = linearInterpolate(0, 50, crescentProgress).toFixed(6);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <svg
    width="100mm"
@@ -160,7 +161,8 @@ function getWaningCrescentMoonMask(cycleProgress) {
 
 function getWaxingGibbousMoonMask(cycleProgress) {
    const gibbousProgress = Math.min(1.0, (cycleProgress - 0.25) * 4.0);
-   const ellipseHorizontalRadius = linearInterpolate(0, 50, gibbousProgress);
+   // Force these value to fixed precision to fix a bug where numbers with too many values after the decimal point breaks the SVG
+   const ellipseHorizontalRadius = linearInterpolate(0, 50, gibbousProgress).toFixed(6);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
@@ -228,7 +230,8 @@ function getWaxingGibbousMoonMask(cycleProgress) {
 
 function getWaningGibbousMoonMask(cycleProgress) {
    const gibbousProgress = Math.min(1.0, (cycleProgress - 0.50) * 4.0);
-   const ellipseHorizontalRadius = linearInterpolate(50, 0, gibbousProgress);
+   // Force these value to fixed precision to fix a bug where numbers with too many values after the decimal point breaks the SVG
+   const ellipseHorizontalRadius = linearInterpolate(50, 0, gibbousProgress).toFixed(6);
    return `<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created with Inkscape (http://www.inkscape.org/) -->
 
